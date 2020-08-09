@@ -1,0 +1,9 @@
+<div class="column-flex">
+  <app-parser (newClass)="newClass($event)"></app-parser>
+  <div class="row-flex">
+    <app-class-options
+      *ngFor="let cl of classes"
+      [KTUClass]="cl"
+    ></app-class-options>
+  </div>
+</div>

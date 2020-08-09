@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.textbox-container {
+  display: flex;
+}
+
+.textbox {
+  flex: 1;
+}

@@ -1,0 +1,24 @@
+<div class="column-flex">
+  <h3>Add Class</h3>
+  <form #form="ngForm" (ngSubmit)="onParseClicked(form)">
+    <div class="row-flex">
+      <input
+        class="flex"
+        ngModel
+        name="classTitle"
+        required
+        placeholder="Class name"
+      />
+      <button [disabled]="form.invalid">Add</button>
+    </div>
+    <div class="row-flex">
+      <textarea
+        class="flex"
+        ngModel
+        name="rawTable"
+        required
+        placeholder="Table data"
+      ></textarea>
+    </div>
+  </form>
+</div>

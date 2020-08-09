@@ -1,0 +1,49 @@
+.type {
+  border-bottom: 2px solid black;
+  text-align: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.vertical-middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.weekday-evenness {
+  width: 2rem;
+  font-size: xx-small;
+  text-align: right;
+  margin-right: 0.2rem;
+}
+
+.weekday {
+  width: 2.5rem;
+}
+
+.time {
+  width: 5.5rem;
+}
+
+.location {
+  font-size: xx-small;
+}
+
+.lecture {
+  border-bottom: 2px solid white;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: smaller;
+}
+
+.theory {
+  background-color: lightpink;
+}
+
+.practical {
+  background-color: lightblue;
+}
+
+.labworks {
+  background-color: lightgreen;
+}
