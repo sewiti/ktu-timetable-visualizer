@@ -1,9 +1,64 @@
-<div class="column-flex">
-  <app-parser (newClass)="newClass($event)"></app-parser>
-  <div class="row-flex">
-    <app-class-options
-      *ngFor="let cl of classes"
-      [KTUClass]="cl"
-    ></app-class-options>
+<div class="row-flex">
+  <div id="time" class="collumn-flex">
+    <div class="header"></div>
+    <div class="time" style="height: 90px;">
+      <span>9:00</span>
+      <span>10:30</span>
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="time" style="height: 90px;">
+      <span>11:00</span>
+      <span>12:30</span>
+    </div>
+    <div style="height: 60px;"></div>
+    <div class="time" style="height: 90px;">
+      <span>13:30</span>
+      <span>15:00</span>
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="time" style="height: 90px;">
+      <span>15:30</span>
+      <span>17:00</span>
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="time" style="height: 90px;">
+      <span>17:30</span>
+      <span>19:00</span>
+    </div>
   </div>
+  <div *ngFor="let w of [0, 1, 2, 3, 4]" class="collumn-flex">
+    <div class="header">
+      <span>{{ getWeekday(w + 1) }}</span>
+    </div>
+    <div class="container">
+      <div
+        *ngFor="let l of grouped[w]; index as i"
+        [class]="'block collumn-flex ' + l.type"
+        [style]="formatStyle(grouped[w], i)"
+      >
+        <div class="title">{{ l.title }}</div>
+        <div class="location">{{ l.location }}</div>
+        <div *ngIf="l.time.weeks !== 'all'" class="evenness">
+          {{ toEvenness(l.time.weeks) }}
+        </div>
+        <div class="teachers">{{ l.teachers }}</div>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="monday" class="collumn-flex">
+    <div class="header"><span>Pirmadienis</span></div>
+    <div *ngFor="let x of grouped[0]" [style]=""></div>
+  </div>
+  <div id="tuesday" class="collumn-flex">
+    <div class="header"><span>Antradienis</span></div>
+  </div>
+  <div id="wednesday" class="collumn-flex">
+    <div class="header"><span>Trečiadienis</span></div>
+  </div>
+  <div id="thursday" class="collumn-flex">
+    <div class="header"><span>Ketvirtadienis</span></div>
+  </div>
+  <div id="friday" class="collumn-flex">
+    <div class="header"><span>Penktadienis</span></div>
+  </div> -->
 </div>

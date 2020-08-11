@@ -1,5 +1,6 @@
-import { KTUClass } from './../parser/parser.component';
-import { Component, OnInit, Input } from '@angular/core';
+import { ClassOptions } from './../parser.service';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-class-options',
@@ -7,9 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./class-options.component.css'],
 })
 export class ClassOptionsComponent implements OnInit {
-  @Input() KTUClass: KTUClass;
+  @Input() KTUClass: ClassOptions;
+  @Output() optionsChanged = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  childChanged(value): void {
+    this.optionsChanged.emit(value);
+  }
 }

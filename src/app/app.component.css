@@ -1,4 +1,11 @@
-.container {
-  display: flex;
-  flex-direction: column;
+.ktu-container {
+  margin-right: 0.5rem;
+}
+
+.title {
+  font-size: small;
+}
+
+.drop-down-list {
+  flex: 1;
 }

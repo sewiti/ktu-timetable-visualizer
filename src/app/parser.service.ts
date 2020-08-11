@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-interface Time {
+export interface Time {
   totalMinutes: number;
   hours: number;
   minutes: number;
@@ -8,6 +8,8 @@ interface Time {
 }
 
 export interface Lecture {
+  title: string;
+  type: 'theory' | 'practical' | 'labworks';
   weekday: number;
   time: {
     weeks: string;
@@ -19,6 +21,7 @@ export interface Lecture {
 }
 
 export interface ClassOptions {
+  title: string;
   theory: Lecture[][];
   practical: Lecture[][];
   labworks: Lecture[][];
@@ -30,7 +33,11 @@ export interface ClassOptions {
 export class ParserService {
   constructor() {}
 
-  public parseLecture(rawLecture: string): Lecture {
+  public parseLecture(
+    title: string,
+    type: 'theory' | 'practical' | 'labworks',
+    rawLecture: string
+  ): Lecture {
     const lines = rawLecture
       .trim()
       .split('\n')
@@ -74,6 +81,8 @@ export class ParserService {
     const minsTo = 60 * +info[6] + +info[7];
 
     return {
+      title,
+      type,
       weekday,
       time: {
         weeks: info[2] ? (info[2] === 'Lyg' ? 'even' : 'odd') : 'all',
@@ -95,21 +104,29 @@ export class ParserService {
     };
   }
 
-  public parseOption(rawOption: string): Lecture[] {
+  public parseOption(
+    title: string,
+    type: 'theory' | 'practical' | 'labworks',
+    rawOption: string
+  ): Lecture[] {
     return rawOption
       .trim()
       .split(new RegExp('(?:s*\n){2}'))
-      .map((lecture) => this.parseLecture(lecture));
+      .map((lecture) => this.parseLecture(title, type, lecture));
   }
 
-  public parseCategory(rawCategory: string): Lecture[][] {
+  public parseCategory(
+    title: string,
+    type: 'theory' | 'practical' | 'labworks',
+    rawCategory: string
+  ): Lecture[][] {
     return rawCategory
       .trim()
       .split(new RegExp('(?:\\s*\\n){3}'))
-      .map((value) => this.parseOption(value));
+      .map((value) => this.parseOption(title, type, value));
   }
 
-  public parse(rawTable: string): ClassOptions {
+  public parse(title: string, rawTable: string): ClassOptions {
     let theory = [];
     let practical = [];
     let labworks = [];
@@ -117,6 +134,8 @@ export class ParserService {
     let tmp = rawTable.trim().split('Teorinės paskaitos');
     if (tmp.length > 1) {
       theory = this.parseCategory(
+        title,
+        'theory',
         tmp[1]
           .trim()
           .split(new RegExp('Praktiniai užsiėmimai|Laboratoriniai darbai'))[0]
@@ -126,6 +145,8 @@ export class ParserService {
     tmp = rawTable.trim().split('Praktiniai užsiėmimai');
     if (tmp.length > 1) {
       practical = this.parseCategory(
+        title,
+        'practical',
         tmp[1]
           .trim()
           .split(new RegExp('Teorinės paskaitos|Laboratoriniai darbai'))[0]
@@ -135,12 +156,14 @@ export class ParserService {
     tmp = rawTable.trim().split('Laboratoriniai darbai');
     if (tmp.length > 1) {
       labworks = this.parseCategory(
+        title,
+        'labworks',
         tmp[1]
           .trim()
           .split(new RegExp('Teorinės paskaitos|Praktiniai užsiėmimai'))[0]
       );
     }
 
-    return { theory, practical, labworks };
+    return { title, theory, practical, labworks };
   }
 }

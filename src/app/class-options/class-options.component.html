@@ -2,19 +2,24 @@
   <div class="row-flex title">
     <span class="flex">{{ KTUClass.title }}</span>
   </div>
-  <app-category-options
-    type="theory"
-    [title]="KTUClass.title"
-    [options]="KTUClass.options.theory"
-  ></app-category-options>
-  <app-category-options
-    type="practical"
-    [title]="KTUClass.title"
-    [options]="KTUClass.options.practical"
-  ></app-category-options>
-  <app-category-options
-    type="labworks"
-    [title]="KTUClass.title"
-    [options]="KTUClass.options.labworks"
-  ></app-category-options>
+  <div>
+    <app-category-options
+      type="theory"
+      [title]="KTUClass.title"
+      [options]="KTUClass.options.theory"
+      (optionsChanged)="childChanged($event)"
+    ></app-category-options>
+    <app-category-options
+      type="practical"
+      [title]="KTUClass.title"
+      [options]="KTUClass.options.practical"
+      (optionsChanged)="childChanged($event)"
+    ></app-category-options>
+    <app-category-options
+      type="labworks"
+      [title]="KTUClass.title"
+      [options]="KTUClass.options.labworks"
+      (optionsChanged)="childChanged($event)"
+    ></app-category-options>
+  </div>
 </div>

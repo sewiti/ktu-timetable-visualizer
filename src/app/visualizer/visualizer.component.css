@@ -1,6 +1,70 @@
+#time {
+  width: 50px;
+}
+
+#monday,
+#tuesday,
+#wednesday,
+#thursday,
+#friday,
+#saturday,
+#sunday {
+  width: 200px;
+}
+
+.header {
+  height: 29px;
+  background-color: lightgray;
+  border-bottom: 1px solid darkslategray;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  font-size: smaller;
+  padding-right: 5px;
+  outline: darkslategray;
+  border-top: 1px solid darkslategray;
+  border-bottom: 1px solid darkslategray;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.block {
+  border: 1px solid;
+  margin: -1px;
+  position: absolute;
+  width: 100%;
+}
+
+.theory {
+  border-color: red;
+  background-color: lightpink;
+}
+
+.practical {
+  border-color: blue;
+  background-color: lightblue;
+}
+
+.labworks {
+  border-color: green;
+  background-color: lightgreen;
+}
+
 .container {
-  flex: 1;
-  display: inline-flex;
-  /* display: flex; */
-  /* flex-direction: column; */
+  position: relative;
+  width: 180px;
+}
+
+.title,
+.evenness {
+  font-size: small;
+}
+
+.location,
+.teachers {
+  font-size: smaller;
 }

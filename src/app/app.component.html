@@ -1,1 +1,27 @@
-<app-visualizer></app-visualizer>
+<div class="column-flex">
+  <app-parser (newClass)="newClass($event)"></app-parser>
+
+  <form #form="ngForm" class="row-flex">
+    <div *ngFor="let c of classes" class="column-flex ktu-container">
+      <span class="title">{{ c.title }}</span>
+      <div
+        *ngFor="let t of [c.theory, c.practical, c.labworks]; index as k"
+        class="row-flex"
+      >
+        <select
+          *ngIf="t.length > 0"
+          ngModel
+          class="drop-down-list"
+          [name]="c.title + k"
+          (change)="optionsChanged(form)"
+        >
+          <option *ngFor="let op of t; index as i" [value]="i">
+            {{ formatOption(op) }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <app-visualizer [selected]="selected"></app-visualizer>
+</div>

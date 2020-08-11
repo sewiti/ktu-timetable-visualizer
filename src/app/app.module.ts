@@ -10,7 +10,13 @@ import { ClassOptionsComponent } from './class-options/class-options.component';
 import { CategoryOptionsComponent } from './category-options/category-options.component';
 
 @NgModule({
-  declarations: [AppComponent, VisualizerComponent, ParserComponent, ClassOptionsComponent, CategoryOptionsComponent],
+  declarations: [
+    AppComponent,
+    VisualizerComponent,
+    ParserComponent,
+    ClassOptionsComponent,
+    CategoryOptionsComponent,
+  ],
   imports: [BrowserModule, FormsModule],
   providers: [ParserService],
   bootstrap: [AppComponent],

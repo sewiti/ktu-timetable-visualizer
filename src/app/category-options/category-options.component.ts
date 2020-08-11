@@ -1,5 +1,6 @@
+import { NgForm } from '@angular/forms';
 import { Lecture } from './../parser.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({
@@ -11,6 +12,7 @@ export class CategoryOptionsComponent implements OnInit {
   @Input() title: string;
   @Input() options: Lecture[];
   @Input() type: string;
+  @Output() optionsChanged = new EventEmitter<any>();
 
   constructor() {}
 
