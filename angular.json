@@ -117,8 +117,13 @@
               "devServerTarget": "ktu-timetable-visualizer:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ktu-timetable-visualizer"
 }
