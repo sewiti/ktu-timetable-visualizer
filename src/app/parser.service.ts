@@ -46,7 +46,8 @@ export class ParserService {
     const info = lines[0].match(
       // '(?:Savaitėm:\\s+([\\d-,\\s]+)\\s+)?(\\w+)\\s+(\\d+):(\\d+)-(\\d+):(\\d+)\\s+(.*)'
       // '(?:(?:Savaitėm: (.+) )|(?:((?:Ne)?[Ll]yg)\\. sav\\. ))?(\\w+) (\\d+):(\\d+)-(\\d+):(\\d+) (.*)'
-      '(?:(?:(?:Savaitėm:\\s+(.+))|(?:((?:Ne)?[Ll]yg)\\.\\s+sav\\.))\\s+)?(\\w+)\\s+(\\d+):(\\d+)-(\\d+):(\\d+)\\s+(.*)'
+      // '(?:(?:(?:Savaitėm:\\s+(.+))|(?:((?:Ne)?[Ll]yg)\\.\\s+sav\\.))\\s+)?(\\w+)\\s+(\\d+):(\\d+)-(\\d+):(\\d+)\\s+(.*)'
+      '(?:(?:(?:Savaitėm:\\s+(.+))|(?:((?:Ne)?[Ll]yg)\\.\\s+sav\\.))\\s+)?(\\w+)\\s+(\\d+):(\\d+)-(\\d+):(\\d+)(?:\\s+(.*))?'
     );
 
     const teachers = lines[1].match('(?:Dėstytojai: )(.*)')[1];
@@ -138,7 +139,7 @@ export class ParserService {
         'theory',
         tmp[1]
           .trim()
-          .split(new RegExp('Praktiniai užsiėmimai|Laboratoriniai darbai'))[0]
+          .split(new RegExp('Praktiniai užsiėmimai|Laboratoriniai darbai|Pratybos|Konsultaciniai seminarai'))[0]
       );
     }
 
@@ -149,8 +150,19 @@ export class ParserService {
         'practical',
         tmp[1]
           .trim()
-          .split(new RegExp('Teorinės paskaitos|Laboratoriniai darbai'))[0]
+          .split(new RegExp('Teorinės paskaitos|Laboratoriniai darbai|Pratybos|Konsultaciniai seminarai'))[0]
       );
+    } else {
+      tmp = rawTable.trim().split('Pratybos');
+      if (tmp.length > 1) {
+        labworks = this.parseCategory(
+          title,
+          'labworks',
+          tmp[1]
+            .trim()
+            .split(new RegExp('Laboratoriniai darbai|Teorinės paskaitos|Praktiniai užsiėmimai|Konsultaciniai seminarai'))[0]
+        );
+      }
     }
 
     tmp = rawTable.trim().split('Laboratoriniai darbai');
@@ -160,8 +172,19 @@ export class ParserService {
         'labworks',
         tmp[1]
           .trim()
-          .split(new RegExp('Teorinės paskaitos|Praktiniai užsiėmimai'))[0]
+          .split(new RegExp('Teorinės paskaitos|Praktiniai užsiėmimai|Pratybos|Konsultaciniai seminarai'))[0]
       );
+    } else {
+      tmp = rawTable.trim().split('Konsultaciniai seminarai');
+      if (tmp.length > 1) {
+        practical = this.parseCategory(
+          title,
+          'practical',
+          tmp[1]
+            .trim()
+            .split(new RegExp('Praktiniai užsiėmimai|Teorinės paskaitos|Laboratoriniai darbai|Pratybos'))[0]
+        );
+      }
     }
 
     return { title, theory, practical, labworks };
