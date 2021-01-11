@@ -41,17 +41,17 @@
 
 .theory {
   border-color: red;
-  background-color: lightpink;
+  background-color: rgba(255, 0, 0, 0.3);
 }
 
 .practical {
   border-color: blue;
-  background-color: lightblue;
+  background-color: rgba(0, 0, 255, 0.3);
 }
 
 .labworks {
   border-color: green;
-  background-color: lightgreen;
+  background-color: rgba(0, 255, 0, 0.3);
 }
 
 .container {
