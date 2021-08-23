@@ -1,6 +1,7 @@
-import { ParserService, ClassOptions, Lecture } from './../parser.service';
+import { ParserService, ClassOptions } from './../parser.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { LocalStorageApi } from '../api/LocalStorageApi';
 
 @Component({
   selector: 'app-parser',
@@ -12,9 +13,9 @@ export class ParserComponent implements OnInit {
   classTitle: string;
   @Output() newClass = new EventEmitter<ClassOptions>();
 
-  constructor(private parser: ParserService) {}
+  constructor(private parser: ParserService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onParseClicked(form: NgForm): void {
     if (form.valid) {
@@ -22,6 +23,7 @@ export class ParserComponent implements OnInit {
         form.value.classTitle,
         form.value.rawTable
       );
+      LocalStorageApi.saveClass(newClass);
       this.newClass.emit(newClass);
       form.setValue({ classTitle: '', rawTable: '' });
     }
