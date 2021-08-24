@@ -1,15 +1,26 @@
 import { NgForm } from '@angular/forms';
 import { Lecture, ClassOptions } from './parser.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageApi } from './api/LocalStorageApi';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   classes: ClassOptions[] = [];
   selected: Lecture[][] = [];
+
+  ngOnInit(): void {
+    const savedClasses = LocalStorageApi.getSavedClasses();
+    savedClasses.forEach(savedClass => this.newClass(savedClass));
+  }
+
+  delete(classTitle: string): void {
+    LocalStorageApi.deleteClass(classTitle);
+    this.classes = this.classes.filter(cl => cl.title !== classTitle);
+  }
 
   newClass(newClass: ClassOptions): void {
     this.classes.push(newClass);

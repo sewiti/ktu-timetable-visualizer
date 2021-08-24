@@ -3,7 +3,11 @@
 
   <form #form="ngForm" class="row-flex">
     <div *ngFor="let c of classes" class="column-flex ktu-container">
-      <span class="title">{{ c.title }}</span>
+      <div class="row-flex space-between">
+        <span class="title">{{ c.title }}</span>
+        <button (click)="delete(c.title)">delete</button>
+      </div>
+
       <div
         *ngFor="let t of [c.theory, c.practical, c.labworks]; index as k"
         class="row-flex"

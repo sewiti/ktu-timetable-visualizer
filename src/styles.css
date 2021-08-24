@@ -13,6 +13,10 @@
   /* flex-direction: row; */
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .flex {
   flex: 1;
 }
